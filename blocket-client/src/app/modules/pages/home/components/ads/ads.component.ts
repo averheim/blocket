@@ -1,0 +1,22 @@
+import { Component, OnInit } from '@angular/core';
+import { BlocketWebDataService } from '../../blocket-web-data.service';
+import { Observable } from 'rxjs';
+import { Ad } from 'src/app/core/models/ad';
+
+@Component({
+  selector: 'app-ads',
+  templateUrl: './ads.component.html',
+  styleUrls: ['./ads.component.css']
+})
+export class AdsComponent implements OnInit {
+
+    ads$: Observable<Ad[]>;
+
+    constructor(private blocketService: BlocketWebDataService) { }
+
+    ngOnInit() {
+        this.ads$ = this.blocketService.ads;
+    }
+
+
+}

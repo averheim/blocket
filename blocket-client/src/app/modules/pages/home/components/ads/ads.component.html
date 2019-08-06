@@ -1,0 +1,16 @@
+<div class="ad-list" *ngIf="ads$ | async as ads">
+    <div *ngFor="let ad of ads">
+        <div class="card">
+            <img src="{{ad.imageSrc | image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <a href="{{ad.url}}">
+                    <h5 class="card-title">{{ad.title}}</h5>
+                </a>
+                <div class="card-text">
+                    <span>{{ad.date}}</span>
+                    <strong>{{ad.price}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

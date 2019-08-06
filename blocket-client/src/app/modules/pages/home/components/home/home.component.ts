@@ -27,8 +27,12 @@ export class HomeComponent implements OnInit {
         this.blocketService.search();
     }
 
-    search(): void {
+    get isLoading(): boolean {
+        return this.blocketService.isLoading;
+    }
 
+    search(queryString: string): void {
+        this.blocketService.search(queryString);
     }
 
 }

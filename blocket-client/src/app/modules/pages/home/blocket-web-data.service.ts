@@ -12,6 +12,7 @@ import { Page } from 'src/app/core/models/page';
     providedIn: 'root'
 })
 export class BlocketWebDataService {
+    private loading = false;
 
     private regionsSource: BehaviorSubject<Region[]> = new BehaviorSubject<Region[]>([]);
     private regions$: Observable<Region[]> = this.regionsSource.asObservable();
@@ -21,6 +22,7 @@ export class BlocketWebDataService {
 
     private paginationSource: BehaviorSubject<Page[]> = new BehaviorSubject<Page[]>([]);
     private pages$: Observable<Page[]> = this.paginationSource.asObservable();
+
 
     constructor(private http: HttpClient) { }
 
@@ -36,7 +38,13 @@ export class BlocketWebDataService {
         return this.pages$;
     }
 
+    get isLoading(): boolean {
+        return this.loading;
+    }
+
     getRegions(): void {
+        this.loading = true;
+
         this.http.get<Region[]>(`${environment.blocketAPIBaseUrl}/regions`).pipe(
             map((response: Region[]) => {
                 const regions = [];
@@ -48,12 +56,17 @@ export class BlocketWebDataService {
         ).toPromise()
         .then(response => {
             this.regionsSource.next(response);
+            this.loading = false;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            this.loading = false;
+        });
     }
 
-    search(): void {
-        this.http.get<any>(`${environment.blocketAPIBaseUrl}/search`).pipe(
+    search(queryString: string = ''): void {
+        this.loading = true;
+        this.http.get<any>(`${environment.blocketAPIBaseUrl}/search${queryString}`).pipe(
             map(response => {
                 const ads = [];
                 const pages = [];
@@ -67,7 +80,13 @@ export class BlocketWebDataService {
         .then(response => {
             this.adsSource.next(response.ads);
             this.paginationSource.next(response.pages);
+            this.loading = false;
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            console.log(error);
+            this.loading = false;
+        });
     }
+
+
 }

@@ -1,31 +1,9 @@
-.card-text {
-    display: flex;
-    justify-content: space-between;
+app-search {
+    padding: 2rem;
 }
 
-.card {
-    width: auto;
-    height: 100%;
-}
-
-.ad-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    grid-gap: 2rem;
-}
-
-.card-img-top {
-    height: 15rem;
-    object-fit: contain;
-    background-color: rgb(240, 240, 240);
-}
-
-.card span {
-    white-space: nowrap;
-    margin-right: 2rem;
-}
-
-.pagination {
-    margin-top: 2rem;
+h1 {
+    padding: 2rem;
+    text-align: center;
     justify-content: center;
 }

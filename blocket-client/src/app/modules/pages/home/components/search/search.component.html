@@ -1,0 +1,13 @@
+<div class="input-group">
+    <input type="text" class="form-control" [(ngModel)]="searchTerm" placeholder="Vad letar du efter?">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Områden</button>
+        <div *ngIf="regions$ | async as regions" class="dropdown-menu">
+            <a *ngFor="let region of regions" class="dropdown-item" href="#">{{region.name}}</a>
+        </div>
+    </div>
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Sök</button>
+    </div>
+</div>
