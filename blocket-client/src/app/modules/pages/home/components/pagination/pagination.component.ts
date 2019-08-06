@@ -11,12 +11,17 @@ import { Page } from 'src/app/core/models/page';
 export class PaginationComponent implements OnInit {
 
     pages$: Observable<Page[]>;
+    selectedPage: Page;
 
     constructor(private blocketService: BlocketWebDataService) { }
 
     ngOnInit() {
         this.pages$ = this.blocketService.pages;
+    }
 
+    choosePage(page: Page): void {
+        this.selectedPage = page;
+        this.blocketService.search(page.queryString);
     }
 
 }

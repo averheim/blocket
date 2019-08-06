@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const blocketService = require('./blocket.service');
 const url = require('url');
+const queryString = require('query-string');
 
 router.get('/regions', getRegions);
 router.get('/search', search);
@@ -35,7 +36,7 @@ function search(request, response) {
 
     blocketService.getDocument(path).then(document => {
         const ads = getAds(document);
-        const pagination = getPagination(document);
+        const pagination = getPagination(document, request);
 
         response.send({ ads, pagination });
     }).catch((error) => console.log(error));
@@ -63,7 +64,7 @@ function getAds(document) {
     return ads;
 }
 
-function getPagination(document) {
+function getPagination(document, request) {
     const allPages = document.getElementById('all_pages');
     let pages = [];
 
@@ -74,31 +75,38 @@ function getPagination(document) {
             const page = pagination[i];
             const queryString = page.getAttribute('href');
             const name = page.text.replace(/\r?\n?/g, '').trim();
-            pages.push({ name, queryString })
+
+            const pageNumber = parsePageNumber(queryString);
+            const isActive = isPageActive(pageNumber, request);
+            pages.push({ name, queryString, pageNumber, isActive })
         }
     }
 
     return pages;
 }
 
+function isPageActive(pageNumber, request) {
+    const urlParts = url.parse(request.url, true);
+    const queryParts = queryString.parse(urlParts.search);
+
+    if (queryParts.o === pageNumber) {
+        return true;
+    } else if (queryParts.o && pageNumber === 1) {
+        return true
+    }
+    return false;
+}
+
+function parsePageNumber(query) {    
+    const queryParts = queryString.parse(query);
+    
+    return queryParts.o;
+    
+}
+
 function buildPath(request) {
     let basePath = 'https://www.blocket.se/hela_sverige'
-
-    // if (request.query.q) {
-    //     basePath += `q=${request.query.q}&`
-    // }
-
-    // if (request.query.r) {
-    //     basePath += `r=${request.query.r}&`
-    // }
-
-    // if (request.query.o) {
-    //     basePath += `o=${request.query.o}&`
-    // }
-
     const urlParts = url.parse(request.url, true);
 
-    console.log(urlParts);
-
-    return `${basePath}${urlParts.search}`;
+    return urlParts.search ? `${basePath}${urlParts.search}` : basePath;
 }

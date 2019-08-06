@@ -3,5 +3,5 @@
     <app-search></app-search>
     <app-loading [loading]="isLoading"></app-loading>
     <app-ads *ngIf="!isLoading && isSearchCompleted"></app-ads>
-    <app-pagination></app-pagination>
+    <app-pagination *ngIf="!isLoading"></app-pagination>
 </div>
