@@ -1,0 +1,15 @@
+.card-text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    width: auto;
+    height: 100%;
+}
+
+.ad-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-gap: 5px;
+}
