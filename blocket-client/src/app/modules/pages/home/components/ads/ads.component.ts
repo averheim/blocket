@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlocketWebDataService } from '../../blocket-web-data.service';
+import { BlocketDataService } from '../../blocket-data.service';
 import { Observable } from 'rxjs';
 import { Ad } from 'src/app/core/models/ad';
 
@@ -12,7 +12,7 @@ export class AdsComponent implements OnInit {
 
     ads$: Observable<Ad[]>;
 
-    constructor(private blocketService: BlocketWebDataService) { }
+    constructor(private blocketService: BlocketDataService) { }
 
     ngOnInit() {
         this.ads$ = this.blocketService.ads;

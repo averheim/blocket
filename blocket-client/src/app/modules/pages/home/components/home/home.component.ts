@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlocketWebDataService } from '../../blocket-web-data.service';
+import { BlocketDataService } from '../../blocket-data.service';
 import { Observable } from 'rxjs';
 import { Region } from 'src/app/core/models/region';
 import { Ad } from 'src/app/core/models/ad';
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     pages$: Observable<Page[]>;
     searchTerm: string;
 
-    constructor(private blocketService: BlocketWebDataService) { }
+    constructor(private blocketService: BlocketDataService) { }
 
     ngOnInit() {
         this.regions$ = this.blocketService.regions;

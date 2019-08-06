@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlocketWebDataService } from '../../blocket-web-data.service';
+import { BlocketDataService } from '../../blocket-data.service';
 import { Region } from 'src/app/core/models/region';
 import { Observable } from 'rxjs';
 
@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
     searchTerm: string;
     selectedRegion: Region = null;
 
-    constructor(private blocketService: BlocketWebDataService) { }
+    constructor(private blocketService: BlocketDataService) { }
 
     ngOnInit() {
         this.regions$ = this.blocketService.regions;

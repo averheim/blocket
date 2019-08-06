@@ -11,7 +11,7 @@ import { Page } from 'src/app/core/models/page';
 @Injectable({
     providedIn: 'root'
 })
-export class BlocketWebDataService {
+export class BlocketDataService {
     private loading = false;
     private searchComplete = false;
 
