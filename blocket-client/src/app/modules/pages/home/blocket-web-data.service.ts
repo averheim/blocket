@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Region } from 'src/app/core/models/region';
 import _ from 'lodash';
 import { Ad } from 'src/app/core/models/ad';
+import { Page } from 'src/app/core/models/page';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,9 @@ export class BlocketWebDataService {
     private adsSource: BehaviorSubject<Ad[]> = new BehaviorSubject<Ad[]>([]);
     private ads$: Observable<Ad[]> = this.adsSource.asObservable();
 
+    private paginationSource: BehaviorSubject<Page[]> = new BehaviorSubject<Page[]>([]);
+    private pages$: Observable<Page[]> = this.paginationSource.asObservable();
+
     constructor(private http: HttpClient) { }
 
     get regions(): Observable<Region[]> {
@@ -26,6 +30,10 @@ export class BlocketWebDataService {
 
     get ads(): Observable<Ad[]> {
         return this.ads$;
+    }
+
+    get pages(): Observable<Page[]> {
+        return this.pages$;
     }
 
     getRegions(): void {
@@ -44,18 +52,21 @@ export class BlocketWebDataService {
         .catch(error => console.log(error));
     }
 
-    getAds(): void {
-        this.http.get<any>(`${environment.blocketAPIBaseUrl}/search?o=2`).pipe(
+    search(): void {
+        this.http.get<any>(`${environment.blocketAPIBaseUrl}/search`).pipe(
             map(response => {
                 const ads = [];
+                const pages = [];
                 console.log(response);
                 response.ads.map(ad => ads.push(_.defaults(new Ad(), ad)));
+                response.pagination.map(page => pages.push(_.defaults(new Page(), page)));
                 console.log(ads);
-                return ads;
+                return { ads, pages };
             })
         ).toPromise()
         .then(response => {
-            this.adsSource.next(response);
+            this.adsSource.next(response.ads);
+            this.paginationSource.next(response.pages);
         })
         .catch(error => console.log(error));
     }

@@ -72,8 +72,8 @@ function getPagination(document) {
         for (let i = 0; i < pagination.length; i++) {
             const page = pagination[i];
             const queryString = page.getAttribute('href');
-            const pageNumber = page.text.replace(/\r?\n?/g, '').trim();
-            pages.push({ pageNumber, queryString })
+            const name = page.text.replace(/\r?\n?/g, '').trim();
+            pages.push({ name, queryString })
         }
     }
 
