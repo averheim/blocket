@@ -45,7 +45,7 @@ export class BlocketWebDataService {
     }
 
     getAds(): void {
-        this.http.get<any>(`${environment.blocketAPIBaseUrl}/search`).pipe(
+        this.http.get<any>(`${environment.blocketAPIBaseUrl}/search?o=2`).pipe(
             map(response => {
                 const ads = [];
                 console.log(response);

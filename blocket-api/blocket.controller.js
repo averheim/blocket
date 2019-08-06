@@ -53,8 +53,10 @@ function getAds(document) {
             const header = article.getElementsByTagName('h1')[0].getElementsByTagName('a')[0];
             const title = header.getAttribute('title');
             const url = header.getAttribute('href');
-            
-            ads.push({ title, price, date, url });
+
+            const image = article.getElementsByTagName('img')[0];
+            const imageSrc = image ? image.getAttribute('longdesc') || image.getAttribute('src') : null;           
+            ads.push({ title, price, date, url, imageSrc });
         }
     }
     return ads;
