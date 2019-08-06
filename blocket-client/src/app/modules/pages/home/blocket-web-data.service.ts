@@ -13,20 +13,5 @@ export class BlocketWebDataService {
 
     constructor(private http: HttpClient) { }
 
-    getBlocket(): void {
-        this.http.get('http://www.blocket.se/').pipe(
-            map(response => {
-                console.log(response);
-                return response;
-            })
-            ).toPromise()
-            .then(response => {
-                this.pageSource.next(response);
-            }
-        );
-    }
 
-    get page(): Observable<any> {
-        return this.page$;
-    }
 }

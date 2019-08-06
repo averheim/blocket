@@ -11,11 +11,8 @@ export class HomeComponent implements OnInit {
 
     constructor(private blocketService: BlocketWebDataService) { }
 
-    page$: Observable<any>;
-
     ngOnInit() {
-        this.page$ = this.blocketService.page;
-        this.blocketService.getBlocket();
+
     }
 
 }
