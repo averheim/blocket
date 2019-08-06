@@ -33,7 +33,6 @@ export class SearchComponent implements OnInit {
             query += `q=${this.searchTerm}&`;
         }
 
-        console.log(this.selectedRegion);
         if (this.selectedRegion) {
             query += `r=${this.selectedRegion.regionNumber}`;
         }
