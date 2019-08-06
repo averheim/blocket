@@ -1,6 +1,6 @@
 export class Region {
     name: string;
-    region: string;
+    regionNumber: string;
 
     constructor() {}
 }

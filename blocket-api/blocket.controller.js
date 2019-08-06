@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const blocketService = require('./blocket.service');
+const url = require('url');
 
 router.get('/regions', getRegions);
 router.get('/search', search);
@@ -19,7 +20,7 @@ async function getRegions(request, response) {
             regions.push({
                 'name': region.text,
                 'href': region.getAttribute('href'),
-                'region': region.getAttribute('data-region')
+                'regionNumber': region.getAttribute('data-region')
             })
         }
 
@@ -81,19 +82,23 @@ function getPagination(document) {
 }
 
 function buildPath(request) {
-    let basePath = 'https://www.blocket.se/hela_sverige?'
+    let basePath = 'https://www.blocket.se/hela_sverige'
 
-    if (request.query.q) {
-        basePath += `q=${request.query.q}&`
-    }
+    // if (request.query.q) {
+    //     basePath += `q=${request.query.q}&`
+    // }
 
-    if (request.query.r) {
-        basePath += `r=${request.query.r}&`
-    }
+    // if (request.query.r) {
+    //     basePath += `r=${request.query.r}&`
+    // }
 
-    if (request.query.o) {
-        basePath += `o=${request.query.o}&`
-    }
+    // if (request.query.o) {
+    //     basePath += `o=${request.query.o}&`
+    // }
 
-    return basePath;
+    const urlParts = url.parse(request.url, true);
+
+    console.log(urlParts);
+
+    return `${basePath}${urlParts.search}`;
 }
