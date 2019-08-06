@@ -2,6 +2,6 @@
     <h1>Blocket klient</h1>
     <app-search></app-search>
     <app-loading [loading]="isLoading"></app-loading>
-    <app-ads></app-ads>
+    <app-ads *ngIf="!isLoading && isSearchCompleted"></app-ads>
     <app-pagination></app-pagination>
 </div>

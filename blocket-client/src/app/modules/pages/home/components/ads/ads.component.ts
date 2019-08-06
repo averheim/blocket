@@ -18,5 +18,13 @@ export class AdsComponent implements OnInit {
         this.ads$ = this.blocketService.ads;
     }
 
+    get hasAds(): boolean {
+        return this.blocketService.hasAds;
+    }
+
+    get isSearchCompleted(): boolean {
+        return this.blocketService.isSearchCompleted;
+    }
+
 
 }

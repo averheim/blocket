@@ -13,6 +13,7 @@ import { Page } from 'src/app/core/models/page';
 })
 export class BlocketWebDataService {
     private loading = false;
+    private searchComplete = false;
 
     private regionsSource: BehaviorSubject<Region[]> = new BehaviorSubject<Region[]>([]);
     private regions$: Observable<Region[]> = this.regionsSource.asObservable();
@@ -42,6 +43,16 @@ export class BlocketWebDataService {
         return this.loading;
     }
 
+    get hasAds(): boolean {
+        return this.adsSource.value && this.adsSource.value.length > 0;
+    }
+
+    get isSearchCompleted(): boolean {
+        return !this.isLoading && this.searchComplete;
+    }
+
+
+
     getRegions(): void {
         this.loading = true;
 
@@ -66,6 +77,7 @@ export class BlocketWebDataService {
 
     search(queryString: string = ''): void {
         this.loading = true;
+        this.searchComplete = false;
         this.http.get<any>(`${environment.blocketAPIBaseUrl}/search${queryString}`).pipe(
             map(response => {
                 const ads = [];
@@ -81,10 +93,12 @@ export class BlocketWebDataService {
             this.adsSource.next(response.ads);
             this.paginationSource.next(response.pages);
             this.loading = false;
+            this.searchComplete = true;
         })
         .catch(error => {
             console.log(error);
             this.loading = false;
+            this.searchComplete = true;
         });
     }
 
