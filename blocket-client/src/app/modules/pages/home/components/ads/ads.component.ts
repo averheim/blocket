@@ -9,7 +9,6 @@ import { Ad } from 'src/app/core/models/ad';
   styleUrls: ['./ads.component.css']
 })
 export class AdsComponent implements OnInit {
-
     ads$: Observable<Ad[]>;
 
     constructor(private blocketService: BlocketDataService) { }
@@ -25,6 +24,4 @@ export class AdsComponent implements OnInit {
     get isSearchCompleted(): boolean {
         return this.blocketService.isSearchCompleted;
     }
-
-
 }

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const blocketService = require('./blocket.service');
 const url = require('url');
+const blocketService = require('./blocket.service');
+const parserService = require('./parsing.service');
 
-const parser = require('./parsing.service');
 
 router.get('/regions', getRegions);
 router.get('/search', search);
@@ -13,7 +13,7 @@ module.exports = router;
 
 async function getRegions(request, response) {
     blocketService.getDocument('https://www.blocket.se').then(document => {
-        const regions = parser.parseRegions(document);
+        const regions = parserService.parseRegions(document);
 
         response.send(regions);
     })
@@ -24,8 +24,8 @@ function search(request, response) {
     const path = buildPath(request);
 
     blocketService.getDocument(path).then(document => {
-        const ads = parser.parseAds(document);
-        const pagination = parser.parsePagination(document, request);
+        const ads = parserService.parseAds(document);
+        const pagination = parserService.parsePagination(document, request);
 
         response.send({ ads, pagination });
     })

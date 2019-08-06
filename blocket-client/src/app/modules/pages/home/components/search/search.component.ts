@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
     regions$: Observable<Region[]>;
     searchTerm: string;
     selectedRegion: Region = null;
@@ -39,5 +38,4 @@ export class SearchComponent implements OnInit {
 
         return query;
     }
-
 }

@@ -9,7 +9,6 @@ import { Page } from 'src/app/core/models/page';
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnInit {
-
     pages$: Observable<Page[]>;
     selectedPage: Page;
 
@@ -23,5 +22,4 @@ export class PaginationComponent implements OnInit {
         this.selectedPage = page;
         this.blocketService.search(page.queryString);
     }
-
 }

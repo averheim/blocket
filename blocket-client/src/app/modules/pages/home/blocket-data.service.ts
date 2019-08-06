@@ -51,8 +51,6 @@ export class BlocketDataService {
         return !this.isLoading && this.searchComplete;
     }
 
-
-
     getRegions(): void {
         this.loading = true;
 
@@ -101,6 +99,4 @@ export class BlocketDataService {
             this.searchComplete = true;
         });
     }
-
-
 }

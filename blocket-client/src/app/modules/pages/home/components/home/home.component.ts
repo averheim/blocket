@@ -11,7 +11,6 @@ import { Page } from 'src/app/core/models/page';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
     regions$: Observable<Region[]>;
     ads$: Observable<Ad[]>;
     pages$: Observable<Page[]>;
@@ -31,12 +30,7 @@ export class HomeComponent implements OnInit {
         return this.blocketService.isLoading;
     }
 
-    get isSearchCompleted(): boolean{
+    get isSearchCompleted(): boolean {
         return this.blocketService.isSearchCompleted;
     }
-
-    search(queryString: string): void {
-        this.blocketService.search(queryString);
-    }
-
 }
