@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.17.1",
     "htmlparser": "^1.7.7",
     "jsdom": "^15.1.1",
