@@ -12,7 +12,7 @@ module.exports = router;
 
 
 async function getRegions(request, response) {
-    blocketService.getDocument('https://www.blocket.se').then(document => {
+    blocketService.getDocument('https://www.blocket.se').then(document => { // TODO Move url to config
         const regions = parserService.parseRegions(document);
 
         response.send(regions);
@@ -33,7 +33,7 @@ function search(request, response) {
 }
 
 function buildPath(request) {
-    let basePath = 'https://www.blocket.se/hela_sverige'
+    let basePath = 'https://www.blocket.se/hela_sverige' // TODO Move url to config
     const urlParts = url.parse(request.url, true);
 
     return urlParts.search ? `${basePath}${urlParts.search}` : basePath;
