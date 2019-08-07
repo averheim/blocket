@@ -24,3 +24,10 @@
     white-space: nowrap;
     margin-right: 2rem;
 }
+
+.no-ads {
+    text-align: center;
+    line-height: 10rem;
+    grid-column-start: 1;
+    grid-column-end: 6;
+}
