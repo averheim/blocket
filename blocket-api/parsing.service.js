@@ -7,7 +7,7 @@ function parseAds(document) {
     const itemList = document.getElementById('item_list');
     if (itemList) {
         const articles = itemList.getElementsByTagName('article');
-        
+
         for (let i = 0; i < articles.length; i++) {
             const article = articles[i];
             const price = article.getElementsByClassName('list_price')[0].textContent;
@@ -17,7 +17,7 @@ function parseAds(document) {
             const url = header.getAttribute('href');
 
             const image = article.getElementsByTagName('img')[0];
-            const imageSrc = image ? image.getAttribute('longdesc') || image.getAttribute('src') : null;           
+            const imageSrc = image ? image.getAttribute('longdesc') || image.getAttribute('src') : null;
             ads.push({ title, price, date, url, imageSrc });
         }
     }
@@ -28,7 +28,7 @@ function parsePagination(document, request) {
     const parsedPages = [];
     const htmlPagination = document.getElementById('all_pages');
 
-    if (htmlPagination) {   
+    if (htmlPagination) {
         const pagination = htmlPagination.getElementsByTagName('a');
 
         for (let i = 0; i < pagination.length; i++) {
@@ -37,7 +37,7 @@ function parsePagination(document, request) {
             const name = page.text.replace(/\r?\n?/g, '').trim();
             const pageNumber = parsePageNumber(queryString);
             const isActive = isPageActive(pageNumber, request);
-            
+
             parsedPages.push({ name, queryString, pageNumber, isActive });
         }
     }
@@ -49,22 +49,22 @@ function parseRegions(document) {
     const regions = [];
     const htmlRegions = document.getElementsByClassName('region_link_list');
 
-        for (i = 0; i < htmlRegions.length; i++) {
-            const htmlRegion = htmlRegions[i];
-            
-            const name = htmlRegion.text;
-            const href = htmlRegion.getAttribute('href');
-            const regionNumber = htmlRegion.getAttribute('data-region');
+    for (i = 0; i < htmlRegions.length; i++) {
+        const htmlRegion = htmlRegions[i];
 
-            regions.push({ name, href, regionNumber });
-        }
-    
+        const name = htmlRegion.text;
+        const href = htmlRegion.getAttribute('href');
+        const regionNumber = htmlRegion.getAttribute('data-region');
+
+        regions.push({ name, href, regionNumber });
+    }
+
     return regions;
 }
 
-function parsePageNumber(query) {    
+function parsePageNumber(query) {
     const queryParts = queryString.parse(query);
-    
+
     return queryParts.o;
 }
 

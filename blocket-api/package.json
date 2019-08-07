@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "test",
+    "test": "jasmine",
     "start": "node app.js",
     "start:watch": "nodemon"
   },
@@ -17,5 +17,8 @@
     "jsdom": "^15.1.1",
     "nodemon": "^1.19.1",
     "query-string": "^6.8.2"
+  },
+  "devDependencies": {
+    "jasmine": "^3.4.0"
   }
 }
