@@ -11,17 +11,10 @@ import { Page } from 'src/app/core/models/page';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    regions$: Observable<Region[]>;
-    ads$: Observable<Ad[]>;
-    pages$: Observable<Page[]>;
-    searchTerm: string;
 
     constructor(private blocketService: BlocketDataService) { }
 
     ngOnInit() {
-        this.regions$ = this.blocketService.regions;
-        this.ads$ = this.blocketService.ads;
-        this.pages$ = this.blocketService.pages;
         this.blocketService.getRegions();
         this.blocketService.search();
     }
